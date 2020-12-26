@@ -6,60 +6,34 @@ import "./createCommentModal.css";
 
 class CreateCommentModal extends React.Component {
   state = {
-    fields: {
-        content: '',
-        image: ''
+    comment: {
+      content: "",
+      image: "",
     },
-    errors: {}
-}
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
-            let { content } = this.state.fields;
-            let { image } = this.state.fields;
-
-            // const value = `; ${document.cookie}`;
-            // const parts = value.split(`; token=`);
-            // const token = parts.pop().split(';').shift();
-
-            let formData = new FormData();
-            formData.append('content', content);
-            formData.append('image', image);
-
-            CommentsAPI.create(formData)
-                .then(res => {
-                    const comment = res.data.comment;
-                    this.props.addComment(comment);
-
-                    // Reset form fields
-                    this.newPostForm.current.reset();
-                    this.setState({ fields: { content: '' } });
-                })
-                .catch(err => {
-                    console.log(err);
-                    let errors = {};
-                    errors['g'] = err.response.data.error;
-                    this.setState({ errors })
-                })
-        
+    let { comment } = this.state;
+    try {
+      CommentsAPI.create(comment);
+      console.log(comment)
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    console.log(comment);
   };
 
-  addComment(comment) {
-    let { comments } = this.state;
-    comments.push(comment);
-    this.setState({ comments });
-}
-
   handleChange = (event) => {
-    let { fields } = this.state;
-    fields[event.target.name] = event.target.value;
-    this.setState({ fields });
+    let { comment } = this.state;
+    comment[event.target.name] = event.target.value;
+    this.setState({ comment });
   };
 
   onClose = (e) => {
     this.props.onClose && this.props.onClose(e);
   };
-  
+
   render() {
     if (!this.props.show) {
       return null;
@@ -73,21 +47,26 @@ class CreateCommentModal extends React.Component {
             type="text"
             label="Nouveau post"
             onChange={this.handleChange}
-            value={this.state.fields["content"]}
+            value={this.state.comment["content"]}
           />
           <Field
             name="image"
             type="file"
             label="Image"
             onChange={this.handleChange}
-            value={this.state.fields["image"]}
+            value={this.state.comment["image"]}
           ></Field>
           <div className="create-comment-button">
-            <Button value="Publier" type="submit" className="comment-button"/>
+            <Button value="Publier" type="submit" className="comment-button" />
           </div>
         </form>
         <div className="create-comment-button">
-          <Button value="Annuler" type="button" onClick={this.onClose} className="comment-button"/>
+          <Button
+            value="Annuler"
+            type="button"
+            onClick={this.onClose}
+            className="comment-button"
+          />
         </div>
       </div>
     );

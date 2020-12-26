@@ -12,8 +12,7 @@ class SignupPage extends Component {
             email: '',
             username: '',
             password: ''
-        },
-        errors: {}
+        }
     }
 
     handleFormSubmit = (event) => {
@@ -21,17 +20,10 @@ class SignupPage extends Component {
             let { fields } = this.state;
             UsersAPI.register(fields)
                 .then(res => {
-                    const date = new Date();
-                    date.setTime(date.getTime() + (24*60*60*1000));
-                    document.cookie = 'token=' + res.data.token + '; expires=' + date.toUTCString() + '; path=/; SameSite=Strict';
                     window.location.href = "/";
                 })
                 .catch(err => {
-                    let errors = {};
-                    for (let error of err.response.data.error.errors) {
-                        errors[error.path] = error.message;
-                    }
-                    this.setState({ errors });
+                    console.log(err);
                 })
         
     }
