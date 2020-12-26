@@ -55,3 +55,8 @@
   span.like:hover {
     cursor: pointer;
   }
+
+  .create-comment-button {
+    display: flex;
+    justify-content: center;
+}
