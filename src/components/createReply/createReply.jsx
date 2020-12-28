@@ -2,22 +2,30 @@ import React from "react";
 import CommentsAPI from "../../services/commentDatamanager";
 import Button from "../../components/button/button.jsx";
 import Field from "../../components/formField/formField.jsx";
-import "./createCommentModal.css";
+import "./createReply.css";
 
-class CreateCommentModal extends React.Component {
+class CreateReply extends React.Component {
+  constructor(props) {
+    super(props);
+    this.id = props.id;
+  }
   state = {
     comment: {
       content: "",
-      image: '',
+      // image: '',
+      id_parent: this.id,
     },
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    let { comment } = this.state;
+    let id_parent = this.id;
+    console.log(id_parent)
+    let { comment } = this.state;    
     console.log(comment);
     try {
-      CommentsAPI.create(comment);
+      CommentsAPI.createReply(comment, this.id);
+      console.log(this.id);
     } catch (error) {
       console.log(error.response.data);
     }
@@ -35,42 +43,24 @@ class CreateCommentModal extends React.Component {
   };
 
   render() {
-    if (!this.props.show) {
-      return null;
-    }
     return (
-      <div className="login-form">
+      <div className="create-reply">
         <form onSubmit={this.handleSubmit}>
-          <h1>Créer un post</h1>
           <Field
             name="content"
             type="text"
             label="Nouveau post"
             onChange={this.handleChange}
             value={this.state.comment["content"]}
+            placeholder="Ajouter un commentaire"
           />
-          <Field
-            name="image"
-            type="file"
-            label="Image"
-            onChange={this.handleChange}
-            value={this.state.comment["image"]}
-          ></Field>
-          <div className="create-comment-button">
-            <Button value="Publier" type="submit" className="comment-button" />
+          <div className="create-reply-button">
+            <Button value="Publier" type="submit" />
           </div>
         </form>
-        <div className="create-comment-button">
-          <Button
-            value="Annuler"
-            type="button"
-            onClick={this.onClose}
-            className="comment-button"
-          />
-        </div>
       </div>
     );
   }
 }
 
-export default CreateCommentModal;
+export default CreateReply;

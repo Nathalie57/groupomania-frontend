@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import authentication from "../../services/authentication";
 import history from "../../services/history";
 import Button from "../../components/button/button.jsx";

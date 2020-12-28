@@ -13,6 +13,9 @@ class RepliesHomePage extends Component {
         this.jwtData = jwtDecode(this.token);
         this.username = this.jwtData.username;
         this.formatDate = (str) => moment(str).format("DD/MM/YYYY");
+        String.prototype.ucFirst = function () {
+          return this.substr(0, 1).toUpperCase() + this.substr(1);
+        };
       }
 
     state = {
@@ -35,11 +38,14 @@ class RepliesHomePage extends Component {
 
   render() {
     let { replies } = this.state;
+    if(!this.props.show){
+      return null;
+  }
     return (
         <div>
         {replies.map(reply => (
           <div className="reply-homepage" key={reply.id}>
-            <div className="reply-username">{reply.username}</div>
+            <div className="reply-username">{reply.username.ucFirst()}</div>
             <div className="reply-date">{this.formatDate(reply.created_at)}</div>
             <div>{reply.content}</div>
             <div>

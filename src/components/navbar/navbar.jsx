@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import history from "../../services/history";
 import Button from "../button/button.jsx";
 import authentication from "../../services/authentication";

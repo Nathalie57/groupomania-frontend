@@ -27,8 +27,8 @@ class App extends React.Component {
               </Route>
 
               <Route exact path="/signup">
-          {isAuthenticated ? <Redirect to="/accueil" /> : <SignupPage />}
-        </Route>
+                {isAuthenticated ? <Redirect to="/accueil" /> : <SignupPage />}
+              </Route>
               <Route exact path="/">
                 {!isAuthenticated ? <LoginPage /> : <Redirect to="/accueil" />}
               </Route>

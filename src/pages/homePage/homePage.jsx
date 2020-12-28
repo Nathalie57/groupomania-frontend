@@ -11,6 +11,9 @@ class HomePage extends Component {
     this.token = localStorage.getItem("authToken");
     this.jwtData = jwtDecode(this.token);
     this.username = this.jwtData.username;
+    String.prototype.ucFirst = function () {
+      return this.substr(0, 1).toUpperCase() + this.substr(1);
+    };
   }
   
   state = {
@@ -31,7 +34,7 @@ class HomePage extends Component {
             <button type="button"  className="comment-creation" onClick={e => {
             this.showModal(e);
           }}>
-              {" "}{this.username}, exprimez-vous !{" "}
+              {this.username.ucFirst()}, exprimez-vous !
               </button>
             <div className="modal">
             <CreateCommentModal  onClose={this.showModal} show={this.state.show}/>
