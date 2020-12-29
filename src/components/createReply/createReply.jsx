@@ -43,6 +43,9 @@ class CreateReply extends React.Component {
   };
 
   render() {
+    if(!this.props.show){
+        return null;
+    }
     return (
       <div className="create-reply">
         <form onSubmit={this.handleSubmit}>

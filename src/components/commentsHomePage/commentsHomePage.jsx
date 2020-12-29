@@ -63,7 +63,7 @@ class CommentsHomePage extends Component {
                   <span>
                     <button
                       type="button"
-                      className="replies-button"
+                      className="like-button"
                       onClick={(e) => {
                         this.showModal();
                       }}
@@ -76,10 +76,18 @@ class CommentsHomePage extends Component {
               <div>
                 <CreateLike id={comment.id} />
                 <span className="share">Partager</span>
-                <span className="comment">Commenter</span>
+                <button
+                      type="button"
+                      className="like-button"
+                      onClick={(e) => {
+                        this.showModal();
+                      }}
+                    >
+                      Commenter
+                    </button>
               </div>
               <div className="createReply">
-                <CreateReply id={comment.id} />
+                <CreateReply id={comment.id}  show={this.state.show} />
               </div>
               <div>
                 <RepliesHomePage id={comment.id} show={this.state.show} />

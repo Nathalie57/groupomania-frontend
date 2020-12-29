@@ -8,7 +8,7 @@ class CountLikes extends Component {
   }
 
   state = {
-    likes: [],
+    likes: 0,
   };
 
   componentDidMount() {
@@ -18,19 +18,19 @@ class CountLikes extends Component {
   getLikes() {
     try {
       CommentsAPI.countLikes(this.id).then((res) => {
-        this.setState({ replies: res.data });
-        console.log(res.data);
+        this.setState({ likes: res.data[0]["COUNT(*)"] });
+        console.log(this.state);
       });
     } catch (error) {}
   }
 
   render() {
-    let { likes } = this.state;
+    // let { likes } = this.state;
     return (
         <div>
         {/* {likes.map((like) => ( */}
           <div className="">
-            <span className="likesCount">{}</span>
+            <span className="likesCount">{this.state.likes}</span>
           </div>
          {/* ))}  */}
       </div>

@@ -27,7 +27,15 @@ class CreateCommentModal extends React.Component {
   handleChange = (event) => {
     let { comment } = this.state;
     comment[event.target.name] = event.target.value;
+    console.log(event.target.value)
     this.setState({ comment });
+  };
+
+  handleFileChange = (event) => {
+    let { comment } = this.state;
+    comment.image = document.getElementById("image").files[0].name
+    this.setState({ comment });
+    console.log(this.state);
   };
 
   onClose = (e) => {
@@ -53,7 +61,7 @@ class CreateCommentModal extends React.Component {
             name="image"
             type="file"
             label="Image"
-            onChange={this.handleChange}
+            onChange={this.handleFileChange}
             value={this.state.comment["image"]}
           ></Field>
           <div className="create-comment-button">

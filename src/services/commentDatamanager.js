@@ -29,7 +29,10 @@ async function create(comment) {
     method: "post",
     url: `${COMMENTS_API}`,
     data: comment,
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { 
+      Authorization: `Bearer ${token}`,
+      'content-type': 'multipart/form-data'
+    },
   };
   let response = await axios(config);
   console.log(response);
@@ -41,7 +44,7 @@ async function createReply(comment, id) {
   const config = {
     method: "post",
     url: `${COMMENTS_API + "/" + id + "/replies"}`,
-    data: comment,
+    data: {...comment, "id_parent" : id},
     headers: { Authorization: `Bearer ${token}` },
   };
   let response = await axios(config);
