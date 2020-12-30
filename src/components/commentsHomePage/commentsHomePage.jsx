@@ -8,6 +8,7 @@ import RepliesHomePage from "../repliesHomePage/repliesHomePage";
 import CreateReply from "../createReply/createReply";
 import CountedLikes from "../countLikes/countLikes";
 import CreateLike from "../createLike/createLike";
+import CountReplies from "../countReplies/countReplies";
 
 class CommentsHomePage extends Component {
   constructor(props) {
@@ -68,7 +69,7 @@ class CommentsHomePage extends Component {
                         this.showModal();
                       }}
                     >
-                      Commentaires
+                      <CountReplies id={comment.id} />
                     </button>
                   </span>
                 </div>
@@ -78,7 +79,7 @@ class CommentsHomePage extends Component {
                 <span className="share">Partager</span>
                 <button
                       type="button"
-                      className="like-button"
+                      className="reply-comment-button"
                       onClick={(e) => {
                         this.showModal();
                       }}

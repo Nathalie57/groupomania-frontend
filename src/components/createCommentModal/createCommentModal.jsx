@@ -3,8 +3,15 @@ import CommentsAPI from "../../services/commentDatamanager";
 import Button from "../../components/button/button.jsx";
 import Field from "../../components/formField/formField.jsx";
 import "./createCommentModal.css";
+import FileInput from "../formField/fileField";
 
 class CreateCommentModal extends React.Component {
+
+  constructor (props) {
+    super(props);
+    this.imageInput = React.createRef();
+  }
+
   state = {
     comment: {
       content: "",
@@ -27,13 +34,14 @@ class CreateCommentModal extends React.Component {
   handleChange = (event) => {
     let { comment } = this.state;
     comment[event.target.name] = event.target.value;
-    console.log(event.target.value)
+    // console.log(event.target.value)
     this.setState({ comment });
   };
 
   handleFileChange = (event) => {
     let { comment } = this.state;
-    comment.image = document.getElementById("image").files[0].name
+    comment[event.target.name] = event.target.files[0].name;
+    // comment.image = document.getElementById("image").files[0].name
     this.setState({ comment });
     console.log(this.state);
   };
@@ -57,13 +65,15 @@ class CreateCommentModal extends React.Component {
             onChange={this.handleChange}
             value={this.state.comment["content"]}
           />
-          <Field
+          {/* <FileInput ref={this.imageInput} onChange={this.handleFileChange} /> */}
+          <FileInput
             name="image"
             type="file"
             label="Image"
             onChange={this.handleFileChange}
-            value={this.state.comment["image"]}
-          ></Field>
+            // value={this.state.comment["image"]}
+            ref={this.imageInput}
+          ></FileInput>
           <div className="create-comment-button">
             <Button value="Publier" type="submit" className="comment-button" />
           </div>

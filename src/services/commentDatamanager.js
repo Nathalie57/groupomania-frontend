@@ -63,6 +63,17 @@ async function countLikes(id) {
   return data;
 }
 
+async function countReplies(id) {
+  const token = localStorage.getItem("authToken");
+  const config = {
+    method: "get",
+    url: `${COMMENTS_API + "/" + id + "/countReplies"}`,
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  let data = await axios(config);
+  return data;
+}
+
 async function createLike(like, id) {
   const token = localStorage.getItem("authToken");
   const config = {
@@ -82,5 +93,6 @@ export default {
   countLikes,
   findChildComments,
   createReply,
-  createLike
+  createLike,
+  countReplies
 };

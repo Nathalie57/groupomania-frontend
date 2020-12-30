@@ -19,7 +19,7 @@ class CountLikes extends Component {
     try {
       CommentsAPI.countLikes(this.id).then((res) => {
         this.setState({ likes: res.data[0]["COUNT(*)"] });
-        console.log(this.state);
+        // console.log(this.state);
       });
     } catch (error) {}
   }
