@@ -3,48 +3,43 @@ import CommentsAPI from "../../services/commentDatamanager";
 import Button from "../../components/button/button.jsx";
 import Field from "../../components/formField/formField.jsx";
 import "./createCommentModal.css";
+import ImageUploader from "react-images-upload";
 import FileInput from "../formField/fileField";
 
 class CreateCommentModal extends React.Component {
-
-  constructor (props) {
+  constructor(props) {
     super(props);
-    this.imageInput = React.createRef();
-  }
+    this.onFileChange = this.onFileChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
-  state = {
-    comment: {
-      content: "",
-      image: '',
-    },
-  };
+    this.state = {
+      image: "",
+      content: ""
+    };
+  }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    let { comment } = this.state;
-    console.log(comment);
+    const formData = new FormData();
+    formData.append("image", this.state.image);
     try {
-      CommentsAPI.create(comment);
+      CommentsAPI.create(formData);
     } catch (error) {
       console.log(error.response.data);
     }
     document.location.reload();
   };
 
-  handleChange = (event) => {
-    let { comment } = this.state;
-    comment[event.target.name] = event.target.value;
-    // console.log(event.target.value)
-    this.setState({ comment });
-  };
-
-  handleFileChange = (event) => {
-    let { comment } = this.state;
-    comment[event.target.name] = event.target.files[0].name;
-    // comment.image = document.getElementById("image").files[0].name
-    this.setState({ comment });
-    console.log(this.state);
-  };
+  onFileChange(e) {
+    this.setState({ image: e.target.files[0], content: e.target.value });
+    console.log(this.state)
+  }
+  //   handleChange = (event) => {
+  //     let { comment } = this.state;
+  //     comment[event.target.name] = event.target.value;
+  //     // console.log(event.target.value)
+  //     this.setState({ comment });
+  //   };
 
   onClose = (e) => {
     this.props.onClose && this.props.onClose(e);
@@ -56,24 +51,19 @@ class CreateCommentModal extends React.Component {
     }
     return (
       <div className="login-form">
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} encType="multipart/form-data">
           <h1>Créer un post</h1>
-          <Field
-            name="content"
-            type="text"
-            label="Nouveau post"
-            onChange={this.handleChange}
-            value={this.state.comment["content"]}
-          />
+
           {/* <FileInput ref={this.imageInput} onChange={this.handleFileChange} /> */}
-          <FileInput
+          {/* <FileInput
             name="image"
             type="file"
             label="Image"
-            onChange={this.handleFileChange}
+            onChange={this.onFileChange}
             // value={this.state.comment["image"]}
             ref={this.imageInput}
-          ></FileInput>
+          ></FileInput> */}
+          <input type="file" onChange={this.onFileChange} />
           <div className="create-comment-button">
             <Button value="Publier" type="submit" className="comment-button" />
           </div>
