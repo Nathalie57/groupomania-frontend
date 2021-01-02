@@ -10,11 +10,12 @@ class CreateCommentModal extends React.Component {
   constructor(props) {
     super(props);
     this.onFileChange = this.onFileChange.bind(this);
+    this.onContentChange = this.onContentChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
+      content: "",
       image: "",
-      content: ""
     };
   }
 
@@ -22,6 +23,7 @@ class CreateCommentModal extends React.Component {
     event.preventDefault();
     const formData = new FormData();
     formData.append("image", this.state.image);
+    formData.append("content", this.state.content);
     try {
       CommentsAPI.create(formData);
     } catch (error) {
@@ -31,16 +33,14 @@ class CreateCommentModal extends React.Component {
   };
 
   onFileChange(e) {
-    this.setState({ image: e.target.files[0], content: e.target.value });
-    console.log(this.state)
+    this.setState({ image: e.target.files[0] });
+    console.log(this.state);
   }
-  //   handleChange = (event) => {
-  //     let { comment } = this.state;
-  //     comment[event.target.name] = event.target.value;
-  //     // console.log(event.target.value)
-  //     this.setState({ comment });
-  //   };
 
+  onContentChange(e) {
+    this.setState({ content: e.target.value })
+  }
+  
   onClose = (e) => {
     this.props.onClose && this.props.onClose(e);
   };
@@ -51,18 +51,15 @@ class CreateCommentModal extends React.Component {
     }
     return (
       <div className="login-form">
-        <form onSubmit={this.handleSubmit} encType="multipart/form-data">
+        <form onSubmit={this.handleSubmit}>
           <h1>Créer un post</h1>
-
-          {/* <FileInput ref={this.imageInput} onChange={this.handleFileChange} /> */}
-          {/* <FileInput
-            name="image"
-            type="file"
-            label="Image"
-            onChange={this.onFileChange}
-            // value={this.state.comment["image"]}
-            ref={this.imageInput}
-          ></FileInput> */}
+          <Field
+            name="content"
+            type="text"
+            label="Nouveau post"
+            onChange={this.onContentChange}
+            value={this.state["content"]}
+          />
           <input type="file" onChange={this.onFileChange} />
           <div className="create-comment-button">
             <Button value="Publier" type="submit" className="comment-button" />
