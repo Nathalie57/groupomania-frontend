@@ -3,8 +3,6 @@ import CommentsAPI from "../../services/commentDatamanager";
 import Button from "../../components/button/button.jsx";
 import Field from "../../components/formField/formField.jsx";
 import "./createCommentModal.css";
-import ImageUploader from "react-images-upload";
-import FileInput from "../formField/fileField";
 
 class CreateCommentModal extends React.Component {
   constructor(props) {
@@ -24,6 +22,7 @@ class CreateCommentModal extends React.Component {
     const formData = new FormData();
     formData.append("image", this.state.image);
     formData.append("content", this.state.content);
+    console.log(formData)
     try {
       CommentsAPI.create(formData);
     } catch (error) {
@@ -34,13 +33,12 @@ class CreateCommentModal extends React.Component {
 
   onFileChange(e) {
     this.setState({ image: e.target.files[0] });
-    console.log(this.state);
   }
 
   onContentChange(e) {
     this.setState({ content: e.target.value })
   }
-  
+
   onClose = (e) => {
     this.props.onClose && this.props.onClose(e);
   };

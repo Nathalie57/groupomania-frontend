@@ -15,36 +15,44 @@ class HomePage extends Component {
       return this.substr(0, 1).toUpperCase() + this.substr(1);
     };
   }
-  
+
   state = {
-    show: false
+    show: false,
   };
-  showModal = e => {
+  showModal = (e) => {
     this.setState({
-      show: !this.state.show
+      show: !this.state.show,
     });
   };
 
-    render() {
-        return (
-          <div className="App">
-      <header className="App-header">
-        <>
-          <div className="comment-homepage">
-            <button type="button"  className="comment-creation" onClick={e => {
-            this.showModal(e);
-          }}>
-              {this.username.ucFirst()}, exprimez-vous !
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <>
+            <div className="comment-homepage">
+              <button
+                type="button"
+                className="comment-creation"
+                onClick={(e) => {
+                  this.showModal(e);
+                }}
+              >
+                {this.username.ucFirst()}, exprimez-vous !
               </button>
-            <div className="modal">
-            <CreateCommentModal  onClose={this.showModal} show={this.state.show}/>
+              <div className="modal">
+                <CreateCommentModal
+                  onClose={this.showModal}
+                  show={this.state.show}
+                />
+              </div>
             </div>
-            </div>
-          <CommentsHomePage />
-        </>
-      </header>
-    </div>
-        )}
+            <CommentsHomePage />
+          </>
+        </header>
+      </div>
+    );
+  }
 }
 
 export default HomePage;

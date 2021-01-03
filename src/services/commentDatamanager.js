@@ -30,12 +30,10 @@ async function create(comment) {
     url: `${COMMENTS_API}`,
     data: comment,
     headers: { 
-      // 'Content-Type': 'multipart/form-data',
       Authorization: `Bearer ${token}`,
     },
   };
   let response = await axios(config);
-  console.log(response);
   return response;
 }
 

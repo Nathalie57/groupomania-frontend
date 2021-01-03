@@ -1,33 +1,14 @@
- .create-reply {
-    max-width: 100%;
-    background: var(--second-background);
-    font-family: "Roboto";
-    font-size: 1rem;
-  }
-  .create-reply li {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .create-reply label {
-      display: none;
-  }
-  
-  .create-reply input {
-    width: 95%;
-    display: block;
-    height: 30px;
-    font-size: 16px;
-    font-family: "Roboto";
-    border: solid;
-    border-color: var(--border-color);
-    border-radius: 35px;
-    margin: .4rem;
-    padding: .2rem;
-  }
-  
-  .create-reply-button {
-      display: none;
-    /* display: flex;
-    flex-direction: row-reverse; */
+.reply-creation {
+  width: 95%;
+  height: 30px;
+  font-size: 1rem;
+  border: solid;
+  border-color: var(--border-color);
+  border-radius: 35px;
+  text-align: initial;
+  color: var(--text);
+  background: var(--second-background);
+  margin-left: 5%;
+  margin-top: 0.4rem;
+  padding: 0.2rem;
 }
