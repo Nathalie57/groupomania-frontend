@@ -13,8 +13,14 @@ class CreateReply extends React.Component {
   state = {
     show: false,
   };
-  
+
   showModal = (e) => {
+    this.setState({
+      show: !this.state.show,
+    });
+  };
+  
+  showReplyModal = (e) => {
     this.setState({
       show: true,
     });
@@ -30,7 +36,7 @@ class CreateReply extends React.Component {
           type="button"
           className="reply-creation"
           onClick={(e) => {
-            this.showModal(e);
+            this.showReplyModal(e);
           }}
         >
           Ajouter un commentaire

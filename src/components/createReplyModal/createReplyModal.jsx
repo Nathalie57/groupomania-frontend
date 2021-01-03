@@ -10,6 +10,7 @@ class CreateReplyModal extends React.Component {
         this.onFileChange = this.onFileChange.bind(this);
         this.onContentChange = this.onContentChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onClose = this.onClose.bind(this);
     
         this.state = {
           content: "",
@@ -20,12 +21,11 @@ class CreateReplyModal extends React.Component {
     
       handleSubmit = (event) => {
         event.preventDefault();
-        let { comment } = this.state;
-        // const formData = new FormData();
-        // formData.append("image", this.state.image);
-        // formData.append("content", this.state.content);
+        const formData = new FormData();
+        formData.append("image", this.state.image);
+        formData.append("content", this.state.content);
         try {
-            CommentsAPI.createReply(comment, this.id);
+            CommentsAPI.createReply(formData, this.id);
         } catch (error) {
           console.log(error.response.data);
         }
@@ -34,10 +34,12 @@ class CreateReplyModal extends React.Component {
     
       onFileChange(e) {
         this.setState({ image: e.target.files[0] });
+        console.log(this.state)
       }
     
       onContentChange(e) {
         this.setState({ content: e.target.value })
+        console.log(this.state)
       }
     
       onClose = (e) => {
