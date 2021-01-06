@@ -78,17 +78,17 @@ class CommentsHomePage extends Component {
                 <CreateLike id={comment.id} />
                 <span className="share">Partager</span>
                 <button
-                      type="button"
-                      className="reply-comment-button"
-                      onClick={(e) => {
-                        this.showModal();
-                      }}
-                    >
-                      Commenter
-                    </button>
+                  type="button"
+                  className="reply-comment-button"
+                  onClick={(e) => {
+                    this.showModal();
+                  }}
+                >
+                  Commenter
+                </button>
               </div>
               <div className="createReply">
-                <CreateReply id={comment.id}  show={this.state.show} />
+                <CreateReply id={comment.id} show={this.state.show} />
               </div>
               <div>
                 <RepliesHomePage id={comment.id} show={this.state.show} />

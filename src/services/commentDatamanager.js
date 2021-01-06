@@ -42,9 +42,11 @@ async function createReply(comment, id) {
   const config = {
     method: "post",
     url: `${COMMENTS_API + "/" + id + "/replies"}`,
-    data: {...comment, "id_parent" : id},
+    data: comment,
     headers: { Authorization: `Bearer ${token}` },
   };
+  console.clear();
+  console.log(comment);
   let response = await axios(config);
   console.log(response);
   return response;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import history from "../../services/history";
 import Button from "../button/button.jsx";
 import authentication from "../../services/authentication";
@@ -31,14 +31,21 @@ class NavBar extends Component {
                 </NavLink>
               </li>
             </> : <>
+            <div>
               <li>
                 <NavLink to="/">
                   <img src="logo.png" className="logo" alt="logo"></img>
                 </NavLink>
               </li>
+              </div>
+              <div>
               <li>
                 <Button onClick={this.handleLogout} value="Déconnexion" className="login-button" />
               </li>
+              <li>
+              <Link to="/delete"><Button  value="Supprimer le compte" className="login-button" /></Link>
+              </li>
+              </div>
             </>}
           
         </ul>

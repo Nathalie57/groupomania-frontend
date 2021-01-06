@@ -21,6 +21,7 @@ class CreateReplyModal extends React.Component {
     
       handleSubmit = (event) => {
         event.preventDefault();
+        console.log(this.state);
         const formData = new FormData();
         formData.append("image", this.state.image);
         formData.append("content", this.state.content);

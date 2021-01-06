@@ -12,6 +12,18 @@ async function register(user) {
   return response;
 }
 
+async function deleteUser(id){
+  const token = localStorage.getItem("authToken");
+  // const config = {
+  //   method: "delete",
+  //   url: `${USERS_API + "/" + id}`,
+  //   headers: { Authorization: `Bearer ${token}` },
+  // }
+  let response = await axios.delete(`${USERS_API + "/" + id}`, {headers: { Authorization: `Bearer ${token}`}});
+  return response.data;
+}
+
 export default {
-  register
+  register,
+  deleteUser
 };

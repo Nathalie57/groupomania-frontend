@@ -6,6 +6,7 @@ import SignupPage from './pages/signupPage/signupPage';
 import Navbar from "./components/navbar/navbar";
 import authentication from "./services/authentication";
 import './App.css';
+import DeleteAccountPage from "./pages/deleteAccountPage/deleteAccountPage";
 
 class App extends React.Component {
   isAuthenticated() {
@@ -25,7 +26,9 @@ class App extends React.Component {
               <Route exact path="/accueil">
                 {isAuthenticated ? <HomePage /> : <Redirect to="/" />}
               </Route>
-
+              <Route exact path="/delete">
+                {isAuthenticated ? <DeleteAccountPage /> : <Redirect to="/" />}
+              </Route>
               <Route exact path="/signup">
                 {isAuthenticated ? <Redirect to="/accueil" /> : <SignupPage />}
               </Route>
