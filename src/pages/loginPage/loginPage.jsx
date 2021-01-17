@@ -12,18 +12,39 @@ class LoginPage extends Component {
       email: "",
       password: "",
     },
+    errors: {},
   };
 
-  handleFormSubmit = (event) => {
-    event.preventDefault();
+  formValidation = (event) => {
+    let formIsValid = true;
+    let errors = {};
 
-    try {
-      authentication.authenticate(this.state.credentials);
-      history.push("/accueil");
-    } catch (error) {
-      console.log(error.response);
+    if (!this.state.credentials["email"] && !this.state.credentials["password"]) {
+      errors["message"] = "Vous devez entrer votre identifiant et votre mot de passe !";
     }
-    window.location.href = '/accueil'
+
+    if (Object.entries(errors).length !== 0) {
+      formIsValid = false;
+    }
+    this.setState({ errors });
+    console.log(this.state);
+    return formIsValid;
+  };
+
+  handleFormSubmit =async (event) => {
+    event.preventDefault();
+    if (this.formValidation()) {
+      try {
+        const succeed = await authentication.authenticate(this.state.credentials);
+        if (!succeed) throw("");
+        history.push("/accueil");
+        window.location.href = "/accueil";
+      } catch (error) {
+        // console.log(error.response);
+        let errors = {};
+        errors["notvalid"] = "Vous devez entrer votre identifiant et votre mot de passe !";
+      }
+    }
   };
 
   handleChange = (event) => {
@@ -35,10 +56,12 @@ class LoginPage extends Component {
   };
 
   render() {
+    let { errors } = this.state;
     return (
       <div className="App">
         <header className="App-header">
-          <h2>Connexion à l'espace sécurisé</h2><br />
+          <h2>Connexion à l'espace sécurisé</h2>
+          <br />
           <img src="https://media.giphy.com/media/l0G17mcoGBEabVgn6/giphy.gif"></img>
           <form onSubmit={this.handleFormSubmit} className="login-form">
             <ul>
@@ -59,6 +82,8 @@ class LoginPage extends Component {
                 span="Entrez votre mot de passe ici"
               />
             </ul>
+            <span className="">{errors["message"]}</span>
+            <span className="">{errors["notvalid"]}</span>
             <div>
               <Button
                 value="Connexion"

@@ -6,14 +6,21 @@ function logout() {
     delete axios.defaults.headers["Authorization"];
 }
 
+
 function authenticate(credentials) {
+    console.clear();
+    console.log("\n\n\------------------------------");
     return axios
         .post("http://localhost:3000/api/users/login", credentials)
-        .then(response => response.data.token)
-        .then(token => {
+        .then(( response) =>{    
+            const token =  response.data.token;
             window.localStorage.setItem("authToken", token);
             axios.defaults.headers["authorization"] = "Bearer " + token;
             return true;
+        })
+        .catch(error=>{
+            console.error(error);
+            return false;
         })
 }
 

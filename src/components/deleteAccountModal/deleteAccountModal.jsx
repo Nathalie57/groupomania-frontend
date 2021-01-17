@@ -1,6 +1,7 @@
 import React from "react";
 import Users_API from "../../services/userDatamanager";
 import Button from "../button/button.jsx";
+import authentication from "../../services/authentication";
 
 class DeleteAccountModal extends React.Component {
   constructor(props) {
@@ -9,9 +10,9 @@ class DeleteAccountModal extends React.Component {
     this.id = props.id;
   }
 
-  state = {
-    users: []
-  }
+  // state = {
+  //   users: []
+  // }
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -20,8 +21,11 @@ class DeleteAccountModal extends React.Component {
     } catch (error) {
       console.log(error.response.data);
     }
-    console.log(this.id)
-    document.location.reload();
+    // console.log(this.id)
+    // document.location.reload();
+    authentication.logout();
+    window.location.href = '/';
+    window.alert("Votre compte a bien été supprimé");
   };
 
   onClose = (e) => {
@@ -38,7 +42,7 @@ class DeleteAccountModal extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <h1>C'est votre dernier mot ?</h1>
           <div className="delete-image">
-            <img src="https://media.giphy.com/media/l5RPZ6WjMv0k0/giphy.gif"></img>
+            <img src="https://media.giphy.com/media/SqmkZ5IdwzTP2/giphy.gif"></img>
           </div>
           <div className="create-comment-button">
             <Button

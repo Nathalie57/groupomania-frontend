@@ -87,6 +87,29 @@ async function createLike(like, id) {
   return response;
 }
 
+async function getLikeByUser(id_comment) {
+  const token = localStorage.getItem("authToken");
+  const config = {
+    method: "get",
+    url: `${COMMENTS_API + "/" + id_comment + "/userLiked"}`,
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  let data = await axios(config);
+  return data;
+}
+
+async function deleteComment(id){
+  const token = localStorage.getItem("authToken");
+  const config = {
+    method: "delete",
+    url: `${COMMENTS_API + "/" + id}`,
+    headers: { Authorization: `Bearer ${token}` },
+  }
+  let response = await axios(config);
+  console.log(response);
+  return response;
+}
+
 export default {
   findMainComments,
   create,
@@ -94,5 +117,7 @@ export default {
   findChildComments,
   createReply,
   createLike,
-  countReplies
+  countReplies,
+  getLikeByUser,
+  deleteComment
 };

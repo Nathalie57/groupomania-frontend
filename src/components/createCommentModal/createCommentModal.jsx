@@ -14,21 +14,42 @@ class CreateCommentModal extends React.Component {
     this.state = {
       content: "",
       image: "",
+      errors: {},
     };
   }
 
+  formValidation = (event) => {
+    // let { comment } = this.state;
+    let formIsValid = true;
+    let errors = {};
+
+    if (!this.state.content && !this.state.image) {
+      errors["message"] =
+        "Vous devez écrire un commentaire ou télécharger une image !";
+    }
+
+    if (Object.entries(errors).length !== 0) {
+      formIsValid = false;
+    }
+    this.setState({ errors });
+    console.log(this.state);
+    return formIsValid;
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append("image", this.state.image);
-    formData.append("content", this.state.content);
-    console.log(formData)
-    try {
-      CommentsAPI.create(formData);
-    } catch (error) {
-      console.log(error.response.data);
+    if (this.formValidation()) {
+      const formData = new FormData();
+      formData.append("image", this.state.image);
+      formData.append("content", this.state.content);
+      console.log(formData);
+      try {
+        CommentsAPI.create(formData);
+      } catch (error) {
+        console.log(error.response.data);
+      }
+      document.location.reload();
     }
-    document.location.reload();
   };
 
   onFileChange(e) {
@@ -36,7 +57,7 @@ class CreateCommentModal extends React.Component {
   }
 
   onContentChange(e) {
-    this.setState({ content: e.target.value })
+    this.setState({ content: e.target.value });
   }
 
   onClose = (e) => {
@@ -44,6 +65,7 @@ class CreateCommentModal extends React.Component {
   };
 
   render() {
+    let { errors } = this.state;
     if (!this.props.show) {
       return null;
     }
@@ -59,6 +81,7 @@ class CreateCommentModal extends React.Component {
             value={this.state["content"]}
           />
           <input type="file" onChange={this.onFileChange} />
+          <span className="create-comment-error">{errors["message"]}</span>
           <div className="create-comment-button">
             <Button value="Publier" type="submit" className="comment-button" />
           </div>

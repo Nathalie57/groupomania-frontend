@@ -96,3 +96,16 @@ button.reply-comment-button:before {
   padding-right: 0.2rem;
   padding-left: 1rem;
 }
+
+button.delete-comment-button {
+  border: none;
+  background: none;
+  font-size: 1rem;
+}
+
+button.delete-comment-button:before {
+  font-family: "Font Awesome\ 5 Free";
+  content: "\f2ed";
+  padding-right: 0.2rem;
+  padding-left: 1rem;
+}

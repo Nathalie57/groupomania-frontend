@@ -13,6 +13,7 @@ import CountReplies from "../countReplies/countReplies";
 class CommentsHomePage extends Component {
   constructor(props) {
     super(props);
+    this.id = props.id;
     this.token = localStorage.getItem("authToken");
     this.jwtData = jwtDecode(this.token);
     this.username = this.jwtData.username;
@@ -33,6 +34,16 @@ class CommentsHomePage extends Component {
     });
   };
 
+  deleteComment = (event) => {
+    event.preventDefault();
+    try {
+      CommentsAPI.deleteComment(this.id);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    document.location.reload();
+  };
+
   componentDidMount() {
     this.getComments();
   }
@@ -41,6 +52,7 @@ class CommentsHomePage extends Component {
     try {
       CommentsAPI.findMainComments().then((res) => {
         this.setState({ comments: res.data });
+        console.log(res.data)
       });
     } catch (error) {}
   }
@@ -51,7 +63,59 @@ class CommentsHomePage extends Component {
       <div>
         {comments.map((comment) => (
           <div className="comment-homepage" key={comment.id}>
-            <div className="username">{comment.username.ucFirst()}</div>
+            {(this.jwtData.is_admin === 1 || this.jwtData.id === comment.id_user) ? <>
+              <div className="username">{comment.username.ucFirst()}</div>
+            <div className="date">{this.formatDate(comment.created_at)}</div>
+            <div>{comment.content}</div>
+            <div>
+              <img src={comment.image} className="image-homepage"></img>
+              <div className="counted-likes">
+                <div className="under-image">
+                  <span>
+                    <CountedLikes id={comment.id} />
+                  </span>
+                  <span>
+                    <button
+                      type="button"
+                      className="like-button"
+                      onClick={(e) => {
+                        this.showModal();
+                      }}
+                    >
+                      <CountReplies id={comment.id} />
+                    </button>
+                  </span>
+                </div>
+              </div>
+              <div>
+                <CreateLike id={comment.id} />
+                <span className="share">Partager</span>
+                <button
+                  type="button"
+                  className="reply-comment-button"
+                  onClick={(e) => {
+                    this.showModal();
+                  }}
+                >
+                  Commenter
+                </button>
+                <button
+                  type="button"
+                  className="delete-comment-button"
+                  onClick={this.deleteComment}
+                >
+                  Supprimer
+                </button>
+              </div>
+              <div className="createReply">
+                <CreateReply id={comment.id} show={this.state.show} />
+              </div>
+              <div>
+                <RepliesHomePage id={comment.id} show={this.state.show} />
+              </div>
+            </div>
+              </> : <>
+              <div className="username">{comment.username.ucFirst()}</div>
             <div className="date">{this.formatDate(comment.created_at)}</div>
             <div>{comment.content}</div>
             <div>
@@ -94,6 +158,8 @@ class CommentsHomePage extends Component {
                 <RepliesHomePage id={comment.id} show={this.state.show} />
               </div>
             </div>
+              </>}
+            
           </div>
         ))}
       </div>

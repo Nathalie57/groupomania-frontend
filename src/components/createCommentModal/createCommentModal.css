@@ -17,3 +17,7 @@
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+span.create-comment-error {
+  color: red;
+}
