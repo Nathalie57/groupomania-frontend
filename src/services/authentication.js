@@ -8,8 +8,6 @@ function logout() {
 
 
 function authenticate(credentials) {
-    console.clear();
-    console.log("\n\n\------------------------------");
     return axios
         .post("http://localhost:3000/api/users/login", credentials)
         .then(( response) =>{    

@@ -19,7 +19,7 @@ class LoginPage extends Component {
     let formIsValid = true;
     let errors = {};
 
-    if (!this.state.credentials["email"] && !this.state.credentials["password"]) {
+    if (!this.state.credentials["email"] || !this.state.credentials["password"]) {
       errors["message"] = "Vous devez entrer votre identifiant et votre mot de passe !";
     }
 
@@ -82,8 +82,8 @@ class LoginPage extends Component {
                 span="Entrez votre mot de passe ici"
               />
             </ul>
-            <span className="">{errors["message"]}</span>
-            <span className="">{errors["notvalid"]}</span>
+            <span className="error_message">{errors["message"]}</span>
+            <span className="error_message">{errors["notvalid"]}</span>
             <div>
               <Button
                 value="Connexion"

@@ -13,6 +13,7 @@ import CountReplies from "../countReplies/countReplies";
 class CommentsHomePage extends Component {
   constructor(props) {
     super(props);
+    this.deleteComment = this.deleteComment.bind(this);
     this.id = props.id;
     this.token = localStorage.getItem("authToken");
     this.jwtData = jwtDecode(this.token);
@@ -34,14 +35,15 @@ class CommentsHomePage extends Component {
     });
   };
 
-  deleteComment = (event) => {
-    event.preventDefault();
+  deleteComment = (id) => {
+    // event.preventDefault();
     try {
-      CommentsAPI.deleteComment(this.id);
+      console.log(id);
+      CommentsAPI.deleteComment(id);
+      document.location.reload();
     } catch (error) {
       console.log(error.response.data);
     }
-    document.location.reload();
   };
 
   componentDidMount() {
@@ -51,6 +53,7 @@ class CommentsHomePage extends Component {
   getComments() {
     try {
       CommentsAPI.findMainComments().then((res) => {
+        console.clear();
         this.setState({ comments: res.data });
         console.log(res.data)
       });
@@ -102,7 +105,7 @@ class CommentsHomePage extends Component {
                 <button
                   type="button"
                   className="delete-comment-button"
-                  onClick={this.deleteComment}
+                  onClick={()=>this.deleteComment(comment.id)}
                 >
                   Supprimer
                 </button>

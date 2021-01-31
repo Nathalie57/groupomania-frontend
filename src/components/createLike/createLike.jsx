@@ -1,3 +1,4 @@
+import jwtDecode from "jwt-decode";
 import React, { Component } from "react";
 import CommentsAPI from "../../services/commentDatamanager";
 import "../button/button.css";
@@ -6,8 +7,8 @@ class CreateLike extends Component {
   constructor(props) {
     super(props);
     this.id = props.id;
-    // this.token = localStorage.getItem("authToken");
-    // this.jwtData = jwtDecode(this.token);
+    this.token = localStorage.getItem("authToken");
+    this.jwtData = jwtDecode(this.token);
   }
 
   state = {
@@ -30,39 +31,20 @@ class CreateLike extends Component {
     } catch (error) {}
   }
 
-  // unlike() {
-  //   try {
-  //     this.setState.likes[0].is_liked === true;
-  //   } catch (error) {}
-  // }
-
   handleSubmit = (event) => {
     event.preventDefault();
     let { like } = this.state;
-    // if (!this.state.likes) {
       try {
-        CommentsAPI.createLike(like, this.id);
+        this.setState({"likes" : CommentsAPI.updateLike(this.id)});
       } catch (error) {
         console.log(error.response.data);
       }
-      document.location.reload();
-    // }
-    //  if (this.state.likes[0].is_liked ===1) {
-    //   try {
-    //     console.log(this.state);
-    //     this.setState({
-    //       is_liked: 0,
-    //     });
-    //   } catch (error) {
-    //     console.log(error.response.data);
-    //   }
-    // }
-    // else this.state.id_liked===0
+      // document.location.reload();
   };
 
   render() {
     return (
-      <button className="like-button" onClick={this.handleSubmit}>
+        <button className="like-button" onClick={this.handleSubmit}>
         <span className="like">J'aime</span>
       </button>
     );

@@ -10,10 +10,6 @@ class DeleteAccountModal extends React.Component {
     this.id = props.id;
   }
 
-  // state = {
-  //   users: []
-  // }
-
   handleSubmit = (event) => {
     event.preventDefault();
     try {
@@ -21,8 +17,6 @@ class DeleteAccountModal extends React.Component {
     } catch (error) {
       console.log(error.response.data);
     }
-    // console.log(this.id)
-    // document.location.reload();
     authentication.logout();
     window.location.href = '/';
     window.alert("Votre compte a bien été supprimé");

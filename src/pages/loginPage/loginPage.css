@@ -5,7 +5,10 @@
     --date-color: #b1b1b1;
     --input-text: #686868;
   }
-  
+  span.error_message {
+    color: red;
+    font-size: 1.3rem;
+}
   .login-form {
       max-width: 75%;
       margin: 50px auto;
