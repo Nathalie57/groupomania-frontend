@@ -40,9 +40,7 @@ class LoginPage extends Component {
         history.push("/accueil");
         window.location.href = "/accueil";
       } catch (error) {
-        // console.log(error.response);
-        let errors = {};
-        errors["notvalid"] = "Vous devez entrer votre identifiant et votre mot de passe !";
+        alert("L'identifiant ou le mot de passe est incorrect");
       }
     }
   };
@@ -83,7 +81,6 @@ class LoginPage extends Component {
               />
             </ul>
             <span className="error_message">{errors["message"]}</span>
-            <span className="error_message">{errors["notvalid"]}</span>
             <div>
               <Button
                 value="Connexion"

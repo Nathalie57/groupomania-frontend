@@ -19,7 +19,6 @@ class CreateCommentModal extends React.Component {
   }
 
   formValidation = (event) => {
-    // let { comment } = this.state;
     let formIsValid = true;
     let errors = {};
 
@@ -32,7 +31,6 @@ class CreateCommentModal extends React.Component {
       formIsValid = false;
     }
     this.setState({ errors });
-    console.log(this.state);
     return formIsValid;
   };
 
