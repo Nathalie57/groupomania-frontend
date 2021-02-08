@@ -38,7 +38,7 @@ class NavBar extends Component {
                 </NavLink>
               </li>
               </div>
-              <div>
+              <div className="nav-button">
               <li>
                 <Button onClick={this.handleLogout} value="Déconnexion" className="login-button" />
               </li>

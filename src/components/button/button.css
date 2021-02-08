@@ -1,62 +1,86 @@
 :root {
-    --background: #f3f2ef;
-    --second-background: #fdfdfd;
-    --border-color: #d8d7d5;
-    --date-color: #b1b1b1;
-    --input-text: #686868;
-  }
-  
+  --background: #f3f2ef;
+  --second-background: #fdfdfd;
+  --border-color: #d8d7d5;
+  --date-color: #b1b1b1;
+  --input-text: #686868;
+}
+
+.login-button {
+  border: none;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: var(--input-text);
+  font: bold 13px "Roboto";
+  color: var(--second-background);
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 523px) {
   .login-button {
-      border: none;
-      padding: 0.5rem;
-      border-radius: 8px;
-      background: var(--input-text);
-      font: bold 13px "Roboto";
-      color: var(--second-background);
-      font-size: 1rem;
-    }
-    
-    a.login-button {
-      padding: 0.5rem;
-      font-size: 1rem;
-      text-decoration: none;
-    }
-  
-    .replies-button {
-      border: none;
-      background: var(--second-background);
-    }
-  
-    button.reply-button {
-      display: none;
-      /* border: none;
-      background: var(--second-background); */
+    font-size: .7rem;
   }
-  
-  button.comment-button {
-    border-radius: .5rem;
-    border-color: var(--input-text);
-    margin: .5rem;
-    width: 20%;
-    padding: .3rem;
-  }
-  
-  .like-button {
+}
+
+a.login-button {
+  padding: 0.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.replies-button {
+  border: none;
+  background: var(--second-background);
+}
+
+button.reply-button {
+  display: none;
+}
+
+button.reply-comment-button {
+  border: none;
+  background: none;
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 523px) {
+  button.reply-comment-button {
     border: none;
     background: none;
-    font-family: 'Roboto';
-    font-size: 1rem;
+    font-size: 0.7rem;
   }
-  
-  .like-button:hover {
-    cursor: pointer;
-  }
-  
-  span.like:hover {
-    cursor: pointer;
-  }
+}
 
-  .create-comment-button {
-    display: flex;
-    justify-content: center;
+button.comment-button {
+  border-radius: 0.5rem;
+  border-color: var(--input-text);
+  margin: 0.5rem;
+  width: 20%;
+  padding: 0.3rem;
+}
+
+.like-button {
+  border: none;
+  background: none;
+  font-family: "Roboto";
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 523px) {
+  .like-button {
+    font-size: 0.7rem;
+  }
+}
+
+.like-button:hover {
+  cursor: pointer;
+}
+
+span.like:hover {
+  cursor: pointer;
+}
+
+.create-comment-button {
+  display: flex;
+  justify-content: center;
 }

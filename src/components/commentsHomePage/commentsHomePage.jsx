@@ -69,7 +69,7 @@ class CommentsHomePage extends Component {
             {(this.jwtData.is_admin === 1 || this.jwtData.id === comment.id_user) ? <>
               <div className="username">{comment.username.ucFirst()}</div>
             <div className="date">{this.formatDate(comment.created_at)}</div>
-            <div>{comment.content}</div>
+            <div className="content">{comment.content}</div>
             <div>
               <img src={comment.image} className="image-homepage"></img>
               <div className="counted-likes">
@@ -120,8 +120,8 @@ class CommentsHomePage extends Component {
               </> : <>
               <div className="username">{comment.username.ucFirst()}</div>
             <div className="date">{this.formatDate(comment.created_at)}</div>
-            <div>{comment.content}</div>
-            <div>
+            <div className="content">{comment.content}</div>
+            <div className="image">
               <img src={comment.image} className="image-homepage"></img>
               <div className="counted-likes">
                 <div className="under-image">

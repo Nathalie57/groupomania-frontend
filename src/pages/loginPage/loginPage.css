@@ -80,4 +80,8 @@
     .login-form textarea {
       resize: none;
     }
+
+    .login-image {
+      width: 80%;
+    }
     

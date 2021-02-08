@@ -60,7 +60,7 @@ class LoginPage extends Component {
         <header className="App-header">
           <h2>Connexion à l'espace sécurisé</h2>
           <br />
-          <img src="https://media.giphy.com/media/l0G17mcoGBEabVgn6/giphy.gif"></img>
+          <img src="https://media.giphy.com/media/l0G17mcoGBEabVgn6/giphy.gif" className="login-image"></img>
           <form onSubmit={this.handleFormSubmit} className="login-form">
             <ul>
               <Field

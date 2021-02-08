@@ -24,6 +24,13 @@ img.image-homepage {
   background: var(--second-background);
 }
 
+@media screen and (max-width: 523px) {
+  .comment-homepage {
+    width: 80%;
+    padding: 1.3rem;
+  }
+}
+
 .counted-likes {
   display: flex;
   flex-direction: column;
@@ -38,9 +45,22 @@ img.image-homepage {
   margin-bottom: 0.6rem;
 }
 
+@media screen and (max-width: 523px) {
+  .counted-likes::after {
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+}
+
 .under-image {
   display: flex;
   margin-top: 1rem;
+}
+
+@media screen and (max-width: 523px) {
+  .under-image {
+    margin-top: .1rem;
+  }
 }
 
 .username {
@@ -48,10 +68,32 @@ img.image-homepage {
   padding-bottom: 0.5rem;
 }
 
+@media screen and (max-width: 523px) {
+  .username {
+    font-size: 1rem;
+  }
+}
+
 .date {
   font-style: italic;
   color: var(--date-color);
   padding-bottom: 0.3rem;
+}
+
+@media screen and (max-width: 523px) {
+  .date {
+    font-size: 0.8rem;
+  }
+}
+
+.content {
+  font-size: 1.3rem;
+}
+
+@media screen and (max-width: 523px) {
+  .content {
+    font-size: 0.8rem;
+  }
 }
 
 span.likesCount:before {
@@ -64,12 +106,29 @@ span.likesCount:before {
 span.likesCount {
   margin-right: 1.5rem;
 }
+@media screen and (max-width: 523px) {
+  span.likesCount {
+    font-size: 0.7rem;
+    margin-right: .8rem;
+  }
+}
 
 span.like:before {
   font-family: "Font Awesome\ 5 Free";
   font-weight: 400;
   content: "\f164";
   padding-right: 0.2rem;
+  margin-left: -0.4rem;
+}
+
+span.share {
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 523px) {
+  span.share {
+    font-size: 0.7rem;
+  }
 }
 
 span.share:before {
@@ -78,6 +137,12 @@ span.share:before {
   content: "\f064";
   padding-right: 0.2rem;
   padding-left: 1rem;
+}
+
+@media screen and (max-width: 523px) {
+  span.share:before {
+    padding-left: 0.5rem;
+  }
 }
 
 #replies {
@@ -97,6 +162,12 @@ button.reply-comment-button:before {
   padding-left: 1rem;
 }
 
+@media screen and (max-width: 523px) {
+  button.reply-comment-button:before {
+    padding-left: 0.5rem;
+  }
+}
+
 button.delete-comment-button {
   border: none;
   background: none;
@@ -108,4 +179,24 @@ button.delete-comment-button:before {
   content: "\f2ed";
   padding-right: 0.2rem;
   padding-left: 1rem;
+}
+
+span.repliesCount {
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 523px) {
+  span.repliesCount {
+    font-size: 0.7rem;
+  }
+}
+
+.image {
+  margin-top: -0.5rem;
+}
+
+@media screen and (max-width: 523px) {
+  .image {
+    margin-top: -1.4rem;
+  }
 }

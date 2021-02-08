@@ -39,7 +39,7 @@ class CreateLike extends Component {
       } catch (error) {
         console.log(error.response.data);
       }
-      // document.location.reload();
+      document.location.reload();
   };
 
   render() {

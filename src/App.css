@@ -9,7 +9,6 @@
   --text: #2b2b2b;
 }
 
-
 body {
   display: flex;
   width: 100%;
@@ -36,8 +35,21 @@ img.logo {
   width: 40%;
 }
 
+@media screen and (max-width: 523px) {
+  img.logo {
+    width: 60%;
+    margin-left: 20%;
+  }
+}
+
 header.App-header {
   padding: 2rem;
+}
+
+@media screen and (max-width: 523px) {
+  header.App-header {
+    padding: 1rem;
+  }
 }
 
 h2 {
@@ -113,4 +125,3 @@ a.login-button {
   font-size: 1rem;
   text-decoration: none;
 } */
-
