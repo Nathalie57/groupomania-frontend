@@ -20,7 +20,7 @@ class HomePage extends Component {
     show: false,
   };
   showModal = (e) => {
-    this.setState({
+    this.setState({ 
       show: !this.state.show,
     });
   };

@@ -24,6 +24,10 @@ class CountLikes extends Component {
     } catch (error) {}
   }
 
+  click = (e) => {
+    this.props.getLikes();
+  };
+
   render() {
     // let { likes } = this.state;
     return (

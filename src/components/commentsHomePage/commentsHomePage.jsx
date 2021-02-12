@@ -19,6 +19,7 @@ class CommentsHomePage extends Component {
     this.jwtData = jwtDecode(this.token);
     this.username = this.jwtData.username;
     this.formatDate = (str) => moment(str).format("DD/MM/YYYY");
+    this.handleSubmit = this.handleSubmit.bind(this);
     String.prototype.ucFirst = function () {
       return this.substr(0, 1).toUpperCase() + this.substr(1);
     };
@@ -27,6 +28,7 @@ class CommentsHomePage extends Component {
   state = {
     comments: [],
     show: false,
+    likes: 0,
   };
 
   showModal = (e) => {
@@ -53,12 +55,30 @@ class CommentsHomePage extends Component {
   getComments() {
     try {
       CommentsAPI.findMainComments().then((res) => {
-        console.clear();
         this.setState({ comments: res.data });
-        console.log(res.data)
+        console.log("vvvvvvv", res.data);
       });
     } catch (error) {}
   }
+
+  handleSubmit = (id) => {
+    // event.preventDefault();
+    console.log({ id });
+
+    // console.log(data);
+    try {
+      this.setState({ likes: CommentsAPI.updateLike(id) });
+      CommentsAPI.countLikes(id).then((res) => {
+        this.setState({ likes: res.data[0]["COUNT(*)"] });
+        console.log(this.state.likes);
+      });
+    } catch (error) {
+      console.log(error.response.data);
+    }
+
+    // document.location.reload();
+    // console.log(this.state);
+  };
 
   render() {
     let { comments } = this.state;
@@ -66,103 +86,119 @@ class CommentsHomePage extends Component {
       <div>
         {comments.map((comment) => (
           <div className="comment-homepage" key={comment.id}>
-            {(this.jwtData.is_admin === 1 || this.jwtData.id === comment.id_user) ? <>
-              <div className="username">{comment.username.ucFirst()}</div>
-            <div className="date">{this.formatDate(comment.created_at)}</div>
-            <div className="content">{comment.content}</div>
-            <div>
-              <img src={comment.image} className="image-homepage"></img>
-              <div className="counted-likes">
-                <div className="under-image">
-                  <span>
-                    <CountedLikes id={comment.id} />
-                  </span>
-                  <span>
+            {this.jwtData.is_admin === 1 ||
+            this.jwtData.id === comment.id_user ? (
+              <>
+                <div className="username">{comment.username.ucFirst()}</div>
+                <div className="date">
+                  {this.formatDate(comment.created_at)}
+                </div>
+                <div className="content">{comment.content}</div>
+                <div>
+                  <img src={comment.image} className="image-homepage"></img>
+                  <div className="counted-likes">
+                    <div className="under-image">
+                      <span>
+                        <CountedLikes id={comment.id} />
+                      </span>
+                      <span>
+                        <button
+                          type="button"
+                          className="like-button"
+                          onClick={(e) => {
+                            this.showModal();
+                          }}
+                        >
+                          <CountReplies id={comment.id} />
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <CreateLike
+                      createLikeOnClick={(e) => {
+                        this.handleSubmit(comment.id);
+                      }}
+                    />
+                    <span className="share">Partager</span>
                     <button
                       type="button"
-                      className="like-button"
+                      className="reply-comment-button"
                       onClick={(e) => {
                         this.showModal();
                       }}
                     >
-                      <CountReplies id={comment.id} />
+                      Commenter
                     </button>
-                  </span>
-                </div>
-              </div>
-              <div>
-                <CreateLike id={comment.id} />
-                <span className="share">Partager</span>
-                <button
-                  type="button"
-                  className="reply-comment-button"
-                  onClick={(e) => {
-                    this.showModal();
-                  }}
-                >
-                  Commenter
-                </button>
-                <button
-                  type="button"
-                  className="delete-comment-button"
-                  onClick={()=>this.deleteComment(comment.id)}
-                >
-                  Supprimer
-                </button>
-              </div>
-              <div className="createReply">
-                <CreateReply id={comment.id} show={this.state.show} />
-              </div>
-              <div>
-                <RepliesHomePage id={comment.id} show={this.state.show} />
-              </div>
-            </div>
-              </> : <>
-              <div className="username">{comment.username.ucFirst()}</div>
-            <div className="date">{this.formatDate(comment.created_at)}</div>
-            <div className="content">{comment.content}</div>
-            <div className="image">
-              <img src={comment.image} className="image-homepage"></img>
-              <div className="counted-likes">
-                <div className="under-image">
-                  <span>
-                    <CountedLikes id={comment.id} />
-                  </span>
-                  <span>
                     <button
                       type="button"
-                      className="like-button"
+                      className="delete-comment-button"
+                      onClick={() => this.deleteComment(comment.id)}
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                  <div className="createReply">
+                    <CreateReply id={comment.id} show={this.state.show} />
+                  </div>
+                  <div>
+                    <RepliesHomePage id={comment.id} show={this.state.show} />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="username">{comment.username.ucFirst()}</div>
+                <div className="date">
+                  {this.formatDate(comment.created_at)}
+                </div>
+                <div className="content">{comment.content}</div>
+                <div className="image">
+                  <img src={comment.image} className="image-homepage"></img>
+                  <div className="counted-likes">
+                    <div className="under-image">
+                      <span>
+                        <CountedLikes id={comment.id} />
+                      </span>
+                      <span>
+                        <button
+                          type="button"
+                          className="like-button"
+                          onClick={(e) => {
+                            this.showModal();
+                          }}
+                        >
+                          <CountReplies id={comment.id} />
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <CreateLike
+                      createLikeOnClick={(e) => {
+                        this.handleSubmit(comment.id);
+                      }}
+                    />
+                    <span className="share">Partager</span>
+                    <button
+                      type="button"
+                      className="reply-comment-button"
                       onClick={(e) => {
                         this.showModal();
                       }}
                     >
-                      <CountReplies id={comment.id} />
+                      Commenter
                     </button>
-                  </span>
+                  </div>
+                  <div className="createReply">
+                    <CreateReply id={comment.id} show={this.state.show} />
+                  </div>
+                  <div>
+                    <RepliesHomePage id={comment.id} show={this.state.show} />
+                  </div>
                 </div>
-              </div>
-              <div>
-                <CreateLike id={comment.id} />
-                <span className="share">Partager</span>
-                <button
-                  type="button"
-                  className="reply-comment-button"
-                  onClick={(e) => {
-                    this.showModal();
-                  }}
-                >
-                  Commenter
-                </button>
-              </div>
-              <div className="createReply">
-                <CreateReply id={comment.id} show={this.state.show} />
-              </div>
-              <div>
-                <RepliesHomePage id={comment.id} show={this.state.show} />
-              </div>
-            </div>
-              </>}
-            
+              </>
+            )}
           </div>
         ))}
       </div>

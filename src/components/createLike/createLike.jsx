@@ -12,7 +12,7 @@ class CreateLike extends Component {
   }
 
   state = {
-    // likes: [],
+    likes: 0,
     id_comment: "",
     id_user: "",
     is_liked: 1,
@@ -31,20 +31,13 @@ class CreateLike extends Component {
     } catch (error) {}
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    let { like } = this.state;
-      try {
-        this.setState({"likes" : CommentsAPI.updateLike(this.id)});
-      } catch (error) {
-        console.log(error.response.data);
-      }
-      document.location.reload();
+  click = (e) => {
+    this.props.createLikeOnClick();
   };
 
   render() {
     return (
-        <button className="like-button" onClick={this.handleSubmit}>
+        <button className="like-button" onClick={this.click}>
         <span className="like">J'aime</span>
       </button>
     );
