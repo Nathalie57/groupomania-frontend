@@ -2,7 +2,7 @@
   --background: #f3f2ef;
   --second-background: #fdfdfd;
   --border-color: #d8d7d5;
-  --date-color: #b1b1b1;
+  --date-color: #424242;
   --input-text: #686868;
 }
 
@@ -59,11 +59,20 @@ button.comment-button {
   padding: 0.3rem;
 }
 
+@media screen and (max-width: 523px) {
+  button.comment-button {
+    font-size: 0.7rem;
+    width: 50%;
+    border: solid 1px;
+  }
+}
+
 .like-button {
   border: none;
   background: none;
   font-family: "Roboto";
-  font-size: 1rem;
+  font-size: 1rem;  
+  color: black;
 }
 
 @media screen and (max-width: 523px) {

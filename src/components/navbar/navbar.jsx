@@ -27,14 +27,14 @@ class NavBar extends Component {
         {!this.setState ? <>
               <li>
                 <NavLink to="/">
-                  <img src="logo.png" className="logo" alt="logo"></img>
+                  <img src="logo.png" className="logo" alt="logo-groupomania"></img>
                 </NavLink>
               </li>
             </> : <>
             <div>
               <li>
                 <NavLink to="/">
-                  <img src="logo.png" className="logo" alt="logo"></img>
+                  <a><img src="logo.png" className="logo" alt="logo-groupomania"></img></a>
                 </NavLink>
               </li>
               </div>

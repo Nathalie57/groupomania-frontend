@@ -34,7 +34,7 @@ class CreateCommentModal extends React.Component {
     return formIsValid;
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     if (this.formValidation()) {
       const formData = new FormData();
@@ -42,11 +42,11 @@ class CreateCommentModal extends React.Component {
       formData.append("content", this.state.content);
       console.log(formData);
       try {
-        CommentsAPI.create(formData);
+        await CommentsAPI.create(formData);
+        document.location.reload();
       } catch (error) {
         console.log(error.response.data);
       }
-      document.location.reload();
     }
   };
 

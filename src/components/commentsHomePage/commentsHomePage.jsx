@@ -56,28 +56,19 @@ class CommentsHomePage extends Component {
     try {
       CommentsAPI.findMainComments().then((res) => {
         this.setState({ comments: res.data });
-        console.log("vvvvvvv", res.data);
+        console.log(res.data);
       });
     } catch (error) {}
   }
 
   handleSubmit = (id) => {
-    // event.preventDefault();
-    console.log({ id });
-
-    // console.log(data);
     try {
       this.setState({ likes: CommentsAPI.updateLike(id) });
-      CommentsAPI.countLikes(id).then((res) => {
-        this.setState({ likes: res.data[0]["COUNT(*)"] });
-        console.log(this.state.likes);
-      });
     } catch (error) {
       console.log(error.response.data);
     }
 
-    // document.location.reload();
-    // console.log(this.state);
+    document.location.reload();
   };
 
   render() {
@@ -94,8 +85,9 @@ class CommentsHomePage extends Component {
                   {this.formatDate(comment.created_at)}
                 </div>
                 <div className="content">{comment.content}</div>
-                <div>
-                  <img src={comment.image} className="image-homepage"></img>
+                {comment.image === null ? (<>
+                <div></div></>
+                ) : ( <> <img src={comment.image} className="image-homepage" alt="comment-image"></img> </>)}
                   <div className="counted-likes">
                     <div className="under-image">
                       <span>
@@ -144,7 +136,7 @@ class CommentsHomePage extends Component {
                   <div>
                     <RepliesHomePage id={comment.id} show={this.state.show} />
                   </div>
-                </div>
+                
               </>
             ) : (
               <>
@@ -153,8 +145,9 @@ class CommentsHomePage extends Component {
                   {this.formatDate(comment.created_at)}
                 </div>
                 <div className="content">{comment.content}</div>
-                <div className="image">
-                  <img src={comment.image} className="image-homepage"></img>
+                {comment.image === null ? (<>
+                <div></div></>
+                ) : ( <> <img src={comment.image} className="image-homepage" alt="comment-image"></img> </>)}
                   <div className="counted-likes">
                     <div className="under-image">
                       <span>
@@ -196,7 +189,7 @@ class CommentsHomePage extends Component {
                   <div>
                     <RepliesHomePage id={comment.id} show={this.state.show} />
                   </div>
-                </div>
+                
               </>
             )}
           </div>

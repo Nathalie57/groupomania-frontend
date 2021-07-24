@@ -2,11 +2,11 @@
   --background: #f3f2ef;
   --second-background: #fdfdfd;
   --border-color: #d8d7d5;
-  --date-color: #b1b1b1;
+  --date-color: #424242;
 }
 
 img.image-homepage {
-  padding-top: 2rem;
+  padding-top: .5rem;
   width: 100%;
 }
 
@@ -17,7 +17,7 @@ img.image-homepage {
   margin-left: auto;
   margin-right: auto;
   padding: 2.5rem;
-  text-align: justify;
+  text-align: left;
   border: solid;
   border-color: var(--border-color);
   border-radius: 1rem;
@@ -59,7 +59,7 @@ img.image-homepage {
 
 @media screen and (max-width: 523px) {
   .under-image {
-    margin-top: .1rem;
+    margin-top: 0.1rem;
   }
 }
 
@@ -109,7 +109,7 @@ span.likesCount {
 @media screen and (max-width: 523px) {
   span.likesCount {
     font-size: 0.7rem;
-    margin-right: .8rem;
+    margin-right: 0.8rem;
   }
 }
 
@@ -179,6 +179,15 @@ button.delete-comment-button:before {
   content: "\f2ed";
   padding-right: 0.2rem;
   padding-left: 1rem;
+}
+
+@media screen and (max-width: 523px) {
+  button.delete-comment-button {
+    border: none;
+    background: none;
+    font-size: 0.7rem;
+    margin-left: -10px;
+  }
 }
 
 span.repliesCount {

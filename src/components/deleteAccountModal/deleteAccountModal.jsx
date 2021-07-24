@@ -10,16 +10,16 @@ class DeleteAccountModal extends React.Component {
     this.id = props.id;
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      Users_API.deleteUser(this.id);
+      await Users_API.deleteUser(this.id);
+      authentication.logout();
+      window.location.href = '/';
+      window.alert("Votre compte a bien été supprimé");
     } catch (error) {
       console.log(error.response.data);
     }
-    authentication.logout();
-    window.location.href = '/';
-    window.alert("Votre compte a bien été supprimé");
   };
 
   onClose = (e) => {

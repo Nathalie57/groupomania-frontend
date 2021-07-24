@@ -2,7 +2,7 @@
     --background: #f3f2ef;
     --second-background: #fdfdfd;
     --border-color: #d8d7d5;
-    --date-color: #b1b1b1;
+    --date-color: #424242;
   }
   
   .reply-homepage {
@@ -27,11 +27,28 @@
     padding-left: 1rem;
   }
 
+  .reply-content {
+    font-size: .9rem;
+  }
+
   img.reply-image-homepage {
     padding-top: 1rem;
     padding-bottom: 1rem;
     width: 80%;
     margin-left: 10%;
+  }
+
+  @media screen and (max-width: 523px) {
+    .reply-username {
+      font-size: 0.9rem;
+    }
+    .reply-date {
+      font-size: .7rem;
+      padding-left: 0rem;
+    }
+    .reply-content {
+      font-size: .8rem;
+    }
   }
   
   

@@ -37,7 +37,7 @@ class CreateLike extends Component {
 
   render() {
     return (
-        <button className="like-button" onClick={this.click}>
+        <button className="like-button">
         <span className="like">J'aime</span>
       </button>
     );
