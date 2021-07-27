@@ -7,5 +7,5 @@ ___
 
 1. Cloner le repository
 2. Installer les dépendances du projet : **npm install**
-3. Démarrer le server : **npm start**
+3. Démarrer le server : **npm start**  
 Le frontend tourne sur le port 3001.
